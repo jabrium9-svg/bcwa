@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Tropical Color Palette */
+  --palm-green: #2D5016;
+  --palm-green-light: #4A7C23;
+  --jungle-green: #1E3D13;
+  --golden-sun: #F5A623;
+  --golden-warm: #E8941C;
+  --golden-light: #FFD54F;
+  --ocean-blue: #0077B6;
+  --ocean-light: #48CAE4;
+  --ocean-deep: #023E8A;
+  --coral: #FF6B6B;
+  --coral-soft: #FF8A8A;
+  --sand: #F5F1E3;
+  --sand-warm: #E8DFC6;
+  --driftwood: #8B7355;
+
+  /* Functional colors */
+  --background: #FFFEF7;
+  --foreground: #2C2416;
+  --text-muted: #6B5D4D;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-palm-green: var(--palm-green);
+  --color-palm-green-light: var(--palm-green-light);
+  --color-jungle-green: var(--jungle-green);
+  --color-golden-sun: var(--golden-sun);
+  --color-golden-warm: var(--golden-warm);
+  --color-golden-light: var(--golden-light);
+  --color-ocean-blue: var(--ocean-blue);
+  --color-ocean-light: var(--ocean-light);
+  --color-ocean-deep: var(--ocean-deep);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-sand: var(--sand);
+  --color-sand-warm: var(--sand-warm);
+  --color-driftwood: var(--driftwood);
+  --color-text-muted: var(--text-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: var(--golden-light);
+  color: var(--jungle-green);
 }

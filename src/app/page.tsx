@@ -3,9 +3,8 @@ export default function Home() {
     <div className="min-h-screen">
       <HeroSection />
       <HowItWorks />
-      <DemoBooths />
+      <TheProblem />
       <WhyBCWA />
-      <VBSTPSection />
       <Footer />
     </div>
   );
@@ -40,17 +39,17 @@ function HeroSection() {
 
         {/* Tagline */}
         <p className="text-2xl sm:text-3xl md:text-4xl text-[#2C2416] font-light mb-4 tracking-wide">
-          Your project. Your pace. Your vibe jockey.
+          Your group. Your conversation. Off-platform.
         </p>
 
         {/* Subhead */}
         <p className="text-lg sm:text-xl text-[#6B5D4D] mb-10 max-w-2xl leading-relaxed">
-          Connect with skilled humans — individuals or agencies — who deliver through conversation.
+          Maintain real, ongoing conversations with your Facebook group members — outside the algorithm, outside the noise.
         </p>
 
         {/* Conversational nature callout */}
         <p className="text-[#8B7355] mb-10 italic">
-          No forms. No browsing. Just tell us what you need.
+          You built the community. Now own the relationship.
         </p>
 
         {/* CTA */}
@@ -59,13 +58,13 @@ function HeroSection() {
             href="#"
             className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#2D5016] to-[#4A7C23] text-white px-10 py-5 rounded-full text-lg font-medium transition-all duration-300 hover:shadow-xl hover:shadow-[#2D5016]/20 hover:scale-105"
           >
-            <span>Start talking</span>
+            <span>Get started</span>
             <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <p className="mt-4 text-sm text-[#6B5D4D]">
-            An agent will learn what you need and introduce you to the right people.
+            For Facebook Group Admins ready to connect beyond the feed.
           </p>
         </div>
       </div>
@@ -84,18 +83,18 @@ function HowItWorks() {
   const steps = [
     {
       number: "1",
-      title: "Tell us what you need",
-      description: "Voice or text — just describe your project. Our agent listens, asks questions, and understands.",
+      title: "Sign up & brand it",
+      description: "Choose your colors and fonts. Make it feel like your community, not ours.",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
         </svg>
       ),
     },
     {
       number: "2",
-      title: "Get introduced",
-      description: "The agent matches you with a vibe jockey or agency. They reach out when they're ready.",
+      title: "Invite your members",
+      description: "Share a link in your group, send emails, or DM your most engaged members directly.",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -104,11 +103,11 @@ function HowItWorks() {
     },
     {
       number: "3",
-      title: "Work at your pace",
-      description: "Conversation that never dies. Pick up where you left off. No lost context, no pressure.",
+      title: "Start real conversations",
+      description: "Voice-first threads that continue over time. No algorithm. No noise. Just you and your people.",
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
       ),
     },
@@ -121,7 +120,7 @@ function HowItWorks() {
           How it works
         </h2>
         <p className="text-center text-[#6B5D4D] mb-16 max-w-xl mx-auto">
-          Our agents do the matchmaking. You just talk.
+          Take your community off-platform in three simple steps.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -158,151 +157,108 @@ function HowItWorks() {
   );
 }
 
-function DemoBooths() {
-  const vibeJockeys = [
+function TheProblem() {
+  const problems = [
     {
-      name: "Marco V.",
-      specialty: "Mobile apps & automation",
-      bio: "10 years building apps that actually ship. Flutter, React Native, and backend automation.",
-      type: "individual",
-      color: "#0077B6",
+      problem: "The algorithm buries your posts",
+      solution: "Direct conversation — no feed, no algorithm, no competition for attention.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+        </svg>
+      ),
     },
     {
-      name: "Priya S.",
-      specialty: "Brand identity & web design",
-      bio: "Helping startups find their voice through design. Figma to production.",
-      type: "individual",
-      color: "#FF6B6B",
-    },
-  ];
-
-  const agencies = [
-    {
-      name: "Greenline Digital",
-      specialty: "Full-stack development",
-      bio: "A team of 8 engineers. Satisfaction guaranteed or we keep working until it's right.",
-      type: "agency",
-      color: "#4A7C23",
+      problem: "Members go inactive and ghost",
+      solution: "Ongoing threads that never die. Pick up where you left off, whenever they're ready.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+        </svg>
+      ),
     },
     {
-      name: "Coral Creative Agency",
-      specialty: "Design to deployment",
-      bio: "End-to-end product design and build. We handle everything so you don't have to.",
-      type: "agency",
-      color: "#F5A623",
+      problem: "Everything is public and performative",
+      solution: "Private, personal conversations. Members speak freely, not for an audience.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+      ),
+    },
+    {
+      problem: "Facebook owns the relationship",
+      solution: "You own it. Your members, your conversations, your data — off their platform.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      ),
     },
   ];
 
   return (
-    <section id="booths" className="py-24 px-6 bg-[#FFFEF7]">
-      <div className="max-w-6xl mx-auto">
+    <section id="problems" className="py-24 px-6 bg-[#FFFEF7]">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[#2D5016] mb-4">
-            Who you might meet
+            Sound familiar?
           </h2>
           <p className="text-lg text-[#6B5D4D] max-w-2xl mx-auto">
-            These are the kinds of people our agents might introduce you to — vibe jockeys for personalized attention, agencies for team support and guarantees.
+            70+ million Facebook group admins face these problems every day. Here&apos;s how BCWA solves them.
           </p>
         </div>
 
-        {/* Vibe Jockeys */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-[#0077B6]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#0077B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {problems.map((item, index) => (
+            <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-sm">
+              {/* Top accent bar */}
+              <div className="h-1 bg-gradient-to-r from-[#FF6B6B] to-[#F5A623]" />
+
+              <div className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-[#FF6B6B]/10 flex items-center justify-center text-[#FF6B6B] shrink-0">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-[#2C2416] mb-2">{item.problem}</h4>
+                    <p className="text-[#4A7C23] font-medium text-sm mb-1">With BCWA:</p>
+                    <p className="text-[#6B5D4D] text-sm leading-relaxed">{item.solution}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <h3 className="text-xl font-medium text-[#2C2416]">Vibe Jockeys</h3>
-            <span className="text-sm text-[#6B5D4D]">— Skilled individuals</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {vibeJockeys.map((person, index) => (
-              <PreviewCard key={index} {...person} />
-            ))}
-          </div>
+          ))}
         </div>
-
-        {/* Agencies */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-[#4A7C23]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#4A7C23]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-medium text-[#2C2416]">Agencies</h3>
-            <span className="text-sm text-[#6B5D4D]">— Teams with quality guarantees</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {agencies.map((agency, index) => (
-              <PreviewCard key={index} {...agency} />
-            ))}
-          </div>
-        </div>
-
-        <p className="text-center mt-12 text-[#8B7355] text-sm">
-          Demo profiles. Real vibe jockeys and agencies coming soon.
-        </p>
       </div>
     </section>
-  );
-}
-
-function PreviewCard({ name, specialty, bio, type, color }: { name: string; specialty: string; bio: string; type: string; color: string }) {
-  return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-sm">
-      {/* Top accent bar */}
-      <div className="h-1" style={{ backgroundColor: color }} />
-
-      <div className="p-6">
-        <div className="flex items-start gap-4">
-          {/* Avatar placeholder */}
-          <div
-            className="w-14 h-14 rounded-full flex items-center justify-center text-white font-medium text-lg shrink-0"
-            style={{ backgroundColor: color }}
-          >
-            {type === "individual" ? name.charAt(0) : name.split(" ").map(w => w[0]).join("").slice(0, 2)}
-          </div>
-
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <h4 className="text-lg font-semibold text-[#2C2416] truncate">{name}</h4>
-              {type === "agency" && (
-                <span className="shrink-0 text-xs px-2 py-0.5 rounded-full bg-[#4A7C23]/10 text-[#4A7C23] font-medium">
-                  Agency
-                </span>
-              )}
-            </div>
-            <p className="text-[#2D5016] text-sm font-medium">{specialty}</p>
-          </div>
-        </div>
-
-        {/* Bio */}
-        <p className="mt-4 text-[#6B5D4D] text-sm leading-relaxed">
-          {bio}
-        </p>
-      </div>
-    </div>
   );
 }
 
 function WhyBCWA() {
   const benefits = [
     {
-      title: "No ghosting",
-      description: "Jabrium keeps the conversation alive. Even when life gets busy.",
+      title: "Voice-first conversations",
+      description: "Members speak naturally. You respond when you can. Deeper connection, less typing.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
         </svg>
       ),
     },
     {
-      title: "No starting over",
-      description: "Full context, always. Pick up exactly where you left off.",
+      title: "Conversations at scale",
+      description: "Maintain ongoing threads with hundreds of members. AI helps you stay on top of it all.",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      ),
+    },
+    {
+      title: "No context lost",
+      description: "Every conversation picks up where it left off. Full history, always available.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -310,20 +266,11 @@ function WhyBCWA() {
       ),
     },
     {
-      title: "Your pace",
-      description: "Async communication. No scheduling pressure. Respond when you can.",
+      title: "Your brand, your space",
+      description: "Custom colors and fonts. It feels like your community, not another platform.",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-    },
-    {
-      title: "Quality options",
-      description: "Work with individuals for personal touch, or agencies with guarantees.",
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
         </svg>
       ),
     },
@@ -336,7 +283,7 @@ function WhyBCWA() {
           Why BCWA?
         </h2>
         <p className="text-center text-[#6B5D4D] mb-16 max-w-xl mx-auto">
-          Getting help shouldn&apos;t mean endless scheduling, lost threads, or starting from scratch every time.
+          Built for admins who want real relationships with their community — not just engagement metrics.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -352,35 +299,6 @@ function WhyBCWA() {
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function VBSTPSection() {
-  return (
-    <section className="py-16 px-6 bg-gradient-to-r from-[#48CAE4]/10 via-[#0077B6]/10 to-[#48CAE4]/10">
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="text-[#6B5D4D] mb-3 text-lg">
-          Just want it built without the back-and-forth?
-        </p>
-        <h3 className="text-2xl sm:text-3xl font-light text-[#023E8A] mb-6">
-          Try <span className="font-medium">Vibesetup</span>.
-        </h3>
-        <p className="text-[#6B5D4D] mb-8 max-w-xl mx-auto">
-          If you already know exactly what you need and want it handled start to finish, Vibesetup is the faster path.
-        </p>
-        <a
-          href="https://vbstp.vercel.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-[#023E8A] text-white px-8 py-4 rounded-full font-medium transition-all duration-300 hover:bg-[#0077B6] hover:shadow-lg"
-        >
-          <span>Go to Vibesetup</span>
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-          </svg>
-        </a>
       </div>
     </section>
   );
@@ -410,7 +328,7 @@ function Footer() {
 
         <div className="mt-8 pt-8 border-t border-white/10 text-center">
           <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} Jabrium. Your project. Your pace. Your vibe jockey.
+            © {new Date().getFullYear()} Jabrium. Your group. Your conversation. Off-platform.
           </p>
         </div>
       </div>

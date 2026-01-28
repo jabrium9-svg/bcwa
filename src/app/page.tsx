@@ -55,7 +55,7 @@ function HeroSection() {
         {/* CTA */}
         <div className="flex flex-col items-center">
           <a
-            href="#"
+            href="https://app.jabrium.com"
             className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#2D5016] to-[#4A7C23] text-white px-10 py-5 rounded-full text-lg font-medium transition-all duration-300 hover:shadow-xl hover:shadow-[#2D5016]/20 hover:scale-105"
           >
             <span>Get started</span>

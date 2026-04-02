@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bot Chee Wa Wa — Your Group. Your Conversation.</title>
+<meta name="description" content="For Facebook Group Admins: maintain real, ongoing conversations with your members outside the algorithm. You built the community — now own the relationship.">
+<meta property="og:title" content="Bot Chee Wa Wa">
+<meta property="og:description" content="Your group. Your conversation. Off-platform. Take your Facebook community beyond the feed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://botcheewawa.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #FDF6EC;
+    --coral: #E8634A;
+    --coral-deep: #C94E38;
+    --ocean: #1B6B6D;
+    --ocean-light: #2A8F8F;
+    --palm: #2D5A3D;
+    --driftwood: #8B7355;
+    --shell: #F5E6D3;
+    --night: #1A1A2E;
+    --cream: #FFFAF3;
+    --gold: #D4A843;
+    --gold-light: #E8C96A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
+    color: var(--night);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== TEXTURE OVERLAY ===== */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ===== SECTION BASE ===== */
+  section {
+    position: relative;
+    padding: 100px 24px;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ===== HEADER / NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+
+  nav.scrolled {
+    background: rgba(253, 246, 236, 0.9);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+
+  .nav-wordmark {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--ocean);
+    text-transform: uppercase;
+  }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--coral);
+    text-decoration: none;
+    padding: 10px 24px;
+    border: 1.5px solid var(--coral);
+    border-radius: 100px;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: var(--coral);
+    color: white;
+  }
+
+  /* ===== SECTION 1: THE HOOK ===== */
+  .hook {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 120px;
+    background: linear-gradient(175deg, var(--sand) 0%, var(--shell) 50%, var(--cream) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hook::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--cream));
+  }
+
+  /* Decorative palm shadows */
+  .hook::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(45, 90, 61, 0.04) 0%, transparent 70%);
+    transform: rotate(-15deg);
+  }
+
+  .hook-wordmark {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: clamp(14px, 2.5vw, 18px);
+    letter-spacing: 12px;
+    text-transform: uppercase;
+    color: var(--ocean);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1s 0.2s forwards;
+  }
+
+  .hook h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 56px);
+    line-height: 1.15;
+    color: var(--night);
+    max-width: 700px;
+    margin: 0 auto 32px;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+
+  .hook h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hook-sub {
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--driftwood);
+    max-width: 520px;
+    margin: 0 auto;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  /* ===== SECTION 2: THE VISION ===== */
+  .vision {
+    background: var(--cream);
+    padding: 120px 24px;
+  }
+
+  .vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .vision-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid;
+  }
+
+  .vision-col.before h3 {
+    color: var(--driftwood);
+    border-color: rgba(139, 115, 85, 0.3);
+  }
+
+  .vision-col.after h3 {
+    color: var(--ocean);
+    border-color: rgba(27, 107, 109, 0.3);
+  }
+
+  .vision-item {
+    margin-bottom: 28px;
+    padding-left: 20px;
+    border-left: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .vision-col.before .vision-item {
+    border-left-color: rgba(139, 115, 85, 0.15);
+  }
+
+  .vision-col.after .vision-item {
+    border-left-color: rgba(27, 107, 109, 0.15);
+  }
+
+  .vision-item p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--night);
+    font-weight: 400;
+  }
+
+  .vision-col.before .vision-item p {
+    color: #6B6B6B;
+  }
+
+  .vision-col.after .vision-item p {
+    color: var(--night);
+  }
+
+  .vision-item .accent {
+    font-weight: 600;
+  }
+
+  .vision-col.after .accent {
+    color: var(--ocean);
+  }
+
+  /* ===== SECTION 3: FOUNDER ===== */
+  .founder {
+    background: var(--ocean);
+    color: white;
+    padding: 120px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .founder::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(42, 143, 143, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(27, 107, 109, 0.6) 0%, transparent 50%);
+  }
+
+  .founder .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .founder-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 40px;
+  }
+
+  .founder blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 400;
+    line-height: 1.6;
+    font-style: italic;
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 48px;
+    max-width: 700px;
+  }
+
+  .founder-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    max-width: 620px;
+    margin-bottom: 20px;
+  }
+
+  .founder-sig {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .founder-sig .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .founder-sig .title {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+
+  /* ===== SECTION 4: HOW IT WORKS (JABRIUM INTRO) ===== */
+  .how {
+    background: var(--sand);
+    padding: 120px 24px;
+  }
+
+  .how .section-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--driftwood);
+    margin-bottom: 16px;
+  }
+
+  .how h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: var(--night);
+    margin-bottom: 16px;
+  }
+
+  .how .intro-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--driftwood);
+    margin-bottom: 64px;
+    max-width: 580px;
+  }
+
+  .how-magic {
+    background: var(--shell);
+    border-left: 3px solid var(--ocean);
+    border-radius: 0 12px 12px 0;
+    padding: 36px 40px;
+    margin-bottom: 64px;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--night);
+    font-style: italic;
+  }
+
+  .how-magic strong {
+    font-style: normal;
+    color: var(--ocean);
+    font-weight: 600;
+  }
+
+  .how-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .how-step {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--shell);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--ocean);
+  }
+
+  .step-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--night);
+    margin-bottom: 8px;
+  }
+
+  .step-content p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #666;
+  }
+
+  /* ===== SECTION 5: SIGNUP ===== */
+  .signup {
+    background: linear-gradient(170deg, var(--shell) 0%, var(--sand) 100%);
+    padding: 120px 24px;
+    text-align: center;
+  }
+
+  .signup h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4.5vw, 44px);
+    font-weight: 700;
+    color: var(--night);
+    margin-bottom: 16px;
+  }
+
+  .signup .sub {
+    font-size: 17px;
+    color: var(--driftwood);
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+
+  .signup-form {
+    max-width: 440px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-field label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--driftwood);
+  }
+
+  .form-field input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    padding: 14px 18px;
+    border: 1.5px solid rgba(139, 115, 85, 0.25);
+    border-radius: 8px;
+    background: white;
+    color: var(--night);
+    transition: border-color 0.3s;
+    outline: none;
+  }
+
+  .form-field input:focus {
+    border-color: var(--ocean);
+  }
+
+  .form-field input::placeholder {
+    color: #BBB;
+  }
+
+  .form-field input.error {
+    border-color: var(--coral);
+  }
+
+  .field-error {
+    font-size: 13px;
+    color: var(--coral);
+    display: none;
+  }
+
+  .field-error.visible {
+    display: block;
+  }
+
+  .signup-btn {
+    margin-top: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 18px 32px;
+    border: none;
+    border-radius: 100px;
+    background: var(--coral);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+
+  .signup-btn:hover {
+    background: var(--coral-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(232, 99, 74, 0.25);
+  }
+
+  .signup-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .signup-note {
+    text-align: center;
+    font-size: 14px;
+    color: var(--driftwood);
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+
+  .signup-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .signup-success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ocean);
+    margin-bottom: 16px;
+  }
+
+  .signup-success p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--driftwood);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .signup-error {
+    display: none;
+    text-align: center;
+    font-size: 15px;
+    color: var(--coral);
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(232, 99, 74, 0.08);
+    border-radius: 8px;
+  }
+
+  /* ===== SECTION 6: EARLY ACCESS ===== */
+  .early {
+    background: var(--night);
+    color: white;
+    padding: 100px 24px;
+    text-align: center;
+  }
+
+  .early-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212, 168, 67, 0.3);
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+
+  .early h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .early p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--night);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: var(--gold-light);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    section { padding: 80px 20px; }
+
+    .vision-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .how-step {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    nav { padding: 16px 20px; }
+    .nav-wordmark { font-size: 14px; letter-spacing: 2px; }
+    .nav-cta { font-size: 12px; padding: 8px 18px; }
+
+    .hook { padding-top: 100px; }
+    .hook-wordmark { letter-spacing: 6px; margin-bottom: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-wordmark">Bot Chee Wa Wa</div>
+  <a href="#signup" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- SECTION 1: THE HOOK -->
+<section class="hook">
+  <div class="container">
+    <div class="hook-wordmark">B &nbsp;O &nbsp;T &nbsp;&nbsp;&nbsp;C &nbsp;H &nbsp;E &nbsp;E &nbsp;&nbsp;&nbsp;W &nbsp;A &nbsp;&nbsp;&nbsp;W &nbsp;A</div>
+    <h1>You built a community of&nbsp;thousands. Facebook thanks you by <em>burying&nbsp;your&nbsp;posts.</em></h1>
+    <p class="hook-sub">You moderate. You nurture. You show up every day. And the algorithm decides who hears you. There's a better way to lead your community.</p>
+  </div>
+</section>
+
+<!-- SECTION 2: THE VISION -->
+<section class="vision">
+  <div class="container">
+    <div class="vision-grid">
+      <div class="vision-col before reveal">
+        <h3>Your life now</h3>
+        <div class="vision-item">
+          <p>You post something thoughtful. <span class="accent">12 people see it.</span> The algorithm decided the rest of your group doesn't care.</p>
+        </div>
+        <div class="vision-item">
+          <p>A member needs real help. The best you can offer is a <span class="accent">public comment thread</span> where everyone watches.</p>
+        </div>
+        <div class="vision-item">
+          <p>You spend hours every week managing a community. <span class="accent">Facebook doesn't pay you a dime.</span></p>
+        </div>
+        <div class="vision-item">
+          <p>You don't own the relationship. <span class="accent">Facebook does.</span> If they change the rules tomorrow, everything you built disappears.</p>
+        </div>
+      </div>
+      <div class="vision-col after reveal">
+        <h3>Your life with BCWA</h3>
+        <div class="vision-item">
+          <p>You talk to your members <span class="accent">directly</span> — voice-first, personal, no algorithm in between.</p>
+        </div>
+        <div class="vision-item">
+          <p>Conversations are <span class="accent">private and persistent.</span> Pick up where you left off. No context lost.</p>
+        </div>
+        <div class="vision-item">
+          <p>Your expertise has value. <span class="accent">Start monetizing</span> the community you've been building for free.</p>
+        </div>
+        <div class="vision-item">
+          <p>You own the relationship. <span class="accent">Off-platform.</span> No algorithm, no policy change, no surprises.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: FOUNDER -->
+<section class="founder">
+  <div class="container reveal">
+    <div class="founder-label">A note from the founder</div>
+    <blockquote>"I kept meeting Facebook group admins who were doing incredible work — building real communities, helping real people — and getting absolutely nothing for it."</blockquote>
+    <p class="founder-body">They couldn't have a real conversation with their own members. Everything was public, performative, and at the mercy of an algorithm that doesn't care about community. They were spending hours every week managing something they didn't own.</p>
+    <p class="founder-body">I built Bot Chee Wa Wa because that's broken. You deserve a way to lead your community through real conversation — on your terms, at your pace, off-platform. BCWA gives you that.</p>
+    <div class="founder-sig">
+      <div class="name">James McGinn</div>
+      <div class="title">Founder, Bot Chee Wa Wa</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="section-label reveal">How it works</div>
+    <h2 class="reveal">Simple by design.</h2>
+    <p class="intro-text reveal">BCWA runs on Jabrium — a free, voice-first platform. You tap, you talk, your members hear you. No algorithm in between.</p>
+    <div class="how-magic reveal">The magic of Jabrium is speech to text and intelligent AI agents listening in the background, ready to step in when needed. <strong>You don't interrupt anybody and they don't interrupt you.</strong> They read your words and respond accordingly. The conversation continues — the pace doesn't matter. Everybody is heard. Nobody is left hanging.</div>
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Sign up and tell us about your group.</h4>
+          <p>Name, email, phone number, and a little about your Facebook community. Takes less than a minute. We'll text you right away — no waiting, no sales call.</p>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Talk to your BCWA agent.</h4>
+          <p>A dedicated agent learns about your group and your goals. Through voice conversation — not forms, not menus. Just talk. The agent will help you figure out the best way to bring your members off-platform.</p>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Preview what your members will see.</h4>
+          <p>Before you invite anyone, your agent walks you through the member experience. You'll know exactly what your community is stepping into — because your reputation matters.</p>
+        </div>
+      </div>
+      <div class="how-step reveal">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Invite your members. In your words.</h4>
+          <p>Share a link in your Facebook group — written by you, in your voice, the way your members know you. They tap, they join, and you have a real, persistent conversation with each of them.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: SIGNUP -->
+<section class="signup" id="signup">
+  <div class="container reveal">
+    <h2>Ready to take your community off-platform?</h2>
+    <p class="sub">We'll text you within minutes. Just your BCWA agent, ready to talk.</p>
+
+    <form id="signup-form" class="signup-form" novalidate>
+      <div class="form-field">
+        <label for="signup-name">Your name</label>
+        <input type="text" id="signup-name" name="name" placeholder="First and last name" required>
+        <span class="field-error" id="error-name">Please enter your name</span>
+      </div>
+      <div class="form-field">
+        <label for="signup-phone">Phone number</label>
+        <input type="tel" id="signup-phone" name="phone" placeholder="(555) 555-5555" required>
+        <span class="field-error" id="error-phone">Please enter a valid phone number</span>
+      </div>
+      <div class="form-field">
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" name="email" placeholder="you@email.com" required>
+        <span class="field-error" id="error-email">Please enter a valid email</span>
+      </div>
+      <div class="form-field">
+        <label for="signup-group">Your Facebook group</label>
+        <input type="text" id="signup-group" name="group" placeholder="Group name or link" required>
+        <span class="field-error" id="error-group">Please enter your group name</span>
+      </div>
+      <button type="submit" class="signup-btn" id="signup-btn">Get Started</button>
+      <div class="signup-error" id="signup-error"></div>
+      <p class="signup-note">No spam. No sales call. Just a text from your BCWA agent.</p>
+    </form>
+
+    <div class="signup-success" id="signup-success">
+      <h3>Check your phone.</h3>
+      <p>We just sent you a text. Tap the link when you're ready — your BCWA agent is waiting to chat.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: EARLY ACCESS -->
+<section class="early">
+  <div class="container reveal">
+    <div class="early-badge">Early Access</div>
+    <h2>We're onboarding our first admins now.</h2>
+    <p>We're working closely with a small group of Facebook community leaders to shape what BCWA becomes. If you run an active group and want a seat at the table, now is the time.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Bot Chee Wa Wa &copy; 2026 &middot; Powered by <a href="https://jabrium.com" target="_blank">Jabrium</a></p>
+</footer>
+
+<script>
+  // Scroll-triggered nav background
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Intersection Observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submission
+  const form = document.getElementById('signup-form');
+  const btn = document.getElementById('signup-btn');
+  const errorBox = document.getElementById('signup-error');
+  const successBox = document.getElementById('signup-success');
+
+  function clearErrors() {
+    document.querySelectorAll('.field-error').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.form-field input').forEach(el => el.classList.remove('error'));
+    errorBox.style.display = 'none';
+  }
+
+  function showFieldError(fieldId, msg) {
+    const input = document.getElementById('signup-' + fieldId);
+    const error = document.getElementById('error-' + fieldId);
+    if (input) input.classList.add('error');
+    if (error) {
+      if (msg) error.textContent = msg;
+      error.classList.add('visible');
+    }
+  }
+
+  function validatePhone(phone) {
+    const digits = phone.replace(/\D/g, '');
+    return digits.length >= 10 && digits.length <= 15;
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    const name = document.getElementById('signup-name').value.trim();
+    const phone = document.getElementById('signup-phone').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const group = document.getElementById('signup-group').value.trim();
+
+    let valid = true;
+    if (!name) { showFieldError('name'); valid = false; }
+    if (!validatePhone(phone)) { showFieldError('phone'); valid = false; }
+    if (!validateEmail(email)) { showFieldError('email'); valid = false; }
+    if (!group) { showFieldError('group'); valid = false; }
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, group })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+
+      // Success — hide form, show confirmation
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+
+    } catch (err) {
+      errorBox.textContent = err.message;
+      errorBox.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Get Started';
+    }
+  });
+</script>
+
+</body>
+</html>

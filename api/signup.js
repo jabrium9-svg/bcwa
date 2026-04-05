@@ -36,12 +36,14 @@ module.exports = async function handler(req, res) {
 
   // Send SMS (primary channel)
   let smsSent = false
+  if (!BIRD_API_KEY) console.error('[BCWA Signup] BIRD_API_KEY is not set!')
   try {
     // Normalize phone: strip non-digits, prepend +1 if no country code
     let digits = phone.replace(/\D/g, '')
     if (digits.length === 10) digits = '1' + digits
-    const toNumber = '+' + digits
+    const toNumber = digits
 
+    console.log(`[BCWA Signup] Bird SMS request: originator="${BIRD_FROM.replace(/^\+/, '')}" to="${toNumber}" bodyLen=${smsBody.length}`)
     const resp = await fetch('https://rest.messagebird.com/messages', {
       method: 'POST',
       headers: {
@@ -49,15 +51,17 @@ module.exports = async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        originator: BIRD_FROM,
+        originator: BIRD_FROM.replace(/^\+/, ''),
         recipients: [toNumber],
         body: smsBody
       })
     })
+    const respBody = await resp.text()
     if (!resp.ok) {
-      const err = await resp.text()
-      throw new Error(`Bird API ${resp.status}: ${err}`)
+      console.error(`[BCWA Signup] Bird API error ${resp.status}:`, respBody)
+      throw new Error(`Bird API ${resp.status}: ${respBody}`)
     }
+    console.log(`[BCWA Signup] Bird API success:`, respBody)
     smsSent = true
     console.log(`[BCWA Signup] SMS sent to ${toNumber}`)
   } catch (err) {

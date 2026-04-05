@@ -1,7 +1,8 @@
 const { Resend } = require('resend')
 
 const BIRD_API_KEY = process.env.BIRD_API_KEY
-const BIRD_FROM = process.env.BIRD_FROM_NUMBER || '+18662091012'
+const BIRD_WORKSPACE_ID = process.env.BIRD_WORKSPACE_ID
+const BIRD_CHANNEL_ID = process.env.BIRD_CHANNEL_ID
 const resend = new Resend(process.env.RESEND_API_KEY)
 const JABRIUM_LINK = 'https://app.jabrium.com?source=bcwa&group='
 
@@ -34,27 +35,36 @@ module.exports = async function handler(req, res) {
 
   console.log(`[BCWA Signup] name="${name}" phone="${phone}" email="${email}" group="${group}"`)
 
-  // Send SMS (primary channel)
+  // Send SMS via Bird Channels API
   let smsSent = false
   if (!BIRD_API_KEY) console.error('[BCWA Signup] BIRD_API_KEY is not set!')
+  if (!BIRD_WORKSPACE_ID) console.error('[BCWA Signup] BIRD_WORKSPACE_ID is not set!')
+  if (!BIRD_CHANNEL_ID) console.error('[BCWA Signup] BIRD_CHANNEL_ID is not set!')
   try {
-    // Normalize phone: strip non-digits, prepend +1 if no country code
+    // Normalize phone to E.164: strip non-digits, prepend +1 if no country code
     let digits = phone.replace(/\D/g, '')
     if (digits.length === 10) digits = '1' + digits
-    const toNumber = digits
+    const toNumber = '+' + digits
 
-    console.log(`[BCWA Signup] Bird SMS request: originator="${BIRD_FROM.replace(/^\+/, '')}" to="${toNumber}" bodyLen=${smsBody.length}`)
-    const resp = await fetch('https://rest.messagebird.com/messages', {
+    const url = `https://api.bird.com/workspaces/${BIRD_WORKSPACE_ID}/channels/${BIRD_CHANNEL_ID}/messages`
+    const payload = {
+      receiver: {
+        contacts: [{ identifierKey: 'phone', identifierValue: toNumber }]
+      },
+      body: {
+        type: 'text',
+        text: { text: smsBody }
+      }
+    }
+
+    console.log(`[BCWA Signup] Bird SMS request: to="${toNumber}" bodyLen=${smsBody.length}`)
+    const resp = await fetch(url, {
       method: 'POST',
       headers: {
-        'Authorization': `AccessKey ${BIRD_API_KEY}`,
+        'Authorization': `Bearer ${BIRD_API_KEY}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        originator: BIRD_FROM.replace(/^\+/, ''),
-        recipients: [toNumber],
-        body: smsBody
-      })
+      body: JSON.stringify(payload)
     })
     const respBody = await resp.text()
     if (!resp.ok) {

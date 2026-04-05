@@ -1,38 +1,51 @@
 module.exports = async function handler(req, res) {
   const BIRD_API_KEY = process.env.BIRD_API_KEY
-  const BIRD_FROM = (process.env.BIRD_FROM_NUMBER || '+18662091012').replace(/^\+/, '')
+  const BIRD_WORKSPACE_ID = process.env.BIRD_WORKSPACE_ID
+  const BIRD_CHANNEL_ID = process.env.BIRD_CHANNEL_ID
 
-  if (!BIRD_API_KEY) {
+  const missing = []
+  if (!BIRD_API_KEY) missing.push('BIRD_API_KEY')
+  if (!BIRD_WORKSPACE_ID) missing.push('BIRD_WORKSPACE_ID')
+  if (!BIRD_CHANNEL_ID) missing.push('BIRD_CHANNEL_ID')
+
+  if (missing.length) {
     return res.status(500).json({
-      error: 'BIRD_API_KEY is not set in environment variables',
-      hint: 'Add BIRD_API_KEY in Vercel project settings → Environment Variables'
+      error: `Missing env vars: ${missing.join(', ')}`,
+      hint: 'Add these in Vercel project settings → Environment Variables. Get workspace ID and channel ID from app.bird.com.'
     })
   }
 
-  // Show key prefix for debugging (never expose full key)
   const keyPreview = BIRD_API_KEY.substring(0, 8) + '...'
 
   try {
-    const resp = await fetch('https://rest.messagebird.com/balance', {
-      headers: { 'Authorization': `AccessKey ${BIRD_API_KEY}` }
-    })
-    const balanceBody = await resp.text()
+    // Test 1: Check auth by listing channels
+    const authResp = await fetch(
+      `https://api.bird.com/workspaces/${BIRD_WORKSPACE_ID}/channels/${BIRD_CHANNEL_ID}`,
+      { headers: { 'Authorization': `Bearer ${BIRD_API_KEY}` } }
+    )
+    const channelBody = await authResp.text()
 
-    // Also try sending a test SMS if ?to= is provided
+    // Test 2: Send a test SMS if ?to= is provided
     let smsResult = null
     const testTo = (req.query.to || '').replace(/\D/g, '')
     if (testTo.length >= 10) {
       const digits = testTo.length === 10 ? '1' + testTo : testTo
-      const smsResp = await fetch('https://rest.messagebird.com/messages', {
+      const toNumber = '+' + digits
+      const url = `https://api.bird.com/workspaces/${BIRD_WORKSPACE_ID}/channels/${BIRD_CHANNEL_ID}/messages`
+      const smsResp = await fetch(url, {
         method: 'POST',
         headers: {
-          'Authorization': `AccessKey ${BIRD_API_KEY}`,
+          'Authorization': `Bearer ${BIRD_API_KEY}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          originator: BIRD_FROM,
-          recipients: [digits],
-          body: 'BCWA Bird test — if you got this, SMS is working!'
+          receiver: {
+            contacts: [{ identifierKey: 'phone', identifierValue: toNumber }]
+          },
+          body: {
+            type: 'text',
+            text: { text: 'BCWA Bird test — if you got this, SMS is working!' }
+          }
         })
       })
       smsResult = {
@@ -43,14 +56,16 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json({
       keyPreview,
-      originator: BIRD_FROM,
-      balance: { status: resp.status, body: balanceBody },
+      workspaceId: BIRD_WORKSPACE_ID,
+      channelId: BIRD_CHANNEL_ID,
+      channel: { status: authResp.status, body: channelBody },
       sms: smsResult || 'Add ?to=5551234567 to send a test SMS'
     })
   } catch (err) {
     return res.status(500).json({
       keyPreview,
-      originator: BIRD_FROM,
+      workspaceId: BIRD_WORKSPACE_ID,
+      channelId: BIRD_CHANNEL_ID,
       error: err.message
     })
   }

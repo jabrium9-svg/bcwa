@@ -1,13 +1,8 @@
-const twilio = require('twilio')
 const { Resend } = require('resend')
 
-const twilioClient = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-)
+const BIRD_API_KEY = process.env.BIRD_API_KEY
+const BIRD_FROM = process.env.BIRD_FROM_NUMBER || '+18662091012'
 const resend = new Resend(process.env.RESEND_API_KEY)
-
-const TWILIO_FROM = process.env.TWILIO_FROM_NUMBER
 const JABRIUM_LINK = 'https://app.jabrium.com?source=bcwa&group='
 
 module.exports = async function handler(req, res) {
@@ -47,11 +42,22 @@ module.exports = async function handler(req, res) {
     if (digits.length === 10) digits = '1' + digits
     const toNumber = '+' + digits
 
-    await twilioClient.messages.create({
-      body: smsBody,
-      from: TWILIO_FROM,
-      to: toNumber
+    const resp = await fetch('https://rest.messagebird.com/messages', {
+      method: 'POST',
+      headers: {
+        'Authorization': `AccessKey ${BIRD_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        originator: BIRD_FROM,
+        recipients: [toNumber],
+        body: smsBody
+      })
     })
+    if (!resp.ok) {
+      const err = await resp.text()
+      throw new Error(`Bird API ${resp.status}: ${err}`)
+    }
     smsSent = true
     console.log(`[BCWA Signup] SMS sent to ${toNumber}`)
   } catch (err) {
